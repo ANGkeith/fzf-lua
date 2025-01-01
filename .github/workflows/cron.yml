@@ -1,0 +1,23 @@
+name: sync fork
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  sync-fork:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up git config
+        run: |
+          git config --global user.name "ANGkeith-bot"
+          git config --global user.email "ANGkeith-bot@users.noreply.github.com"
+      - name: Sync Fork
+        run: |
+          git remote add upstream https://github.com/ibhagwan/fzf-lua.git
+          git fetch upstream main
+          git rebase upstream/main
+          git push --force-with-lease
