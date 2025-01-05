@@ -985,7 +985,7 @@ M.set_header = function(opts, hdr_tbl)
               to = to(o)
             end
             table.insert(ret, def and def.pos or #ret + 1,
-              string.format("<%s> to %s",
+              string.format("<%s> ➜ %s",
                 utils.ansi_from_hl(opts.hls.header_bind, k),
                 utils.ansi_from_hl(opts.hls.header_text, tostring(to))))
           end
