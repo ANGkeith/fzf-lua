@@ -1030,6 +1030,18 @@ M.set_header = function(opts, hdr_tbl)
     end
   end
   if hdr_str and #hdr_str > 0 then
+    function find_max_length(str)
+      local maxLength = 0
+      for line in str:gmatch("[^\r\n]+") do
+        line = utils.strip_ansi_coloring(line)
+        local length = #line
+        if length > maxLength then
+          maxLength = length - 2 -- minus opening and closing quotes
+        end
+      end
+      return maxLength
+    end
+    hdr_str = hdr_str .. "\n" .. string.rep("=", find_max_length(hdr_str))
     opts.fzf_opts["--header"] = hdr_str
   end
   return opts
