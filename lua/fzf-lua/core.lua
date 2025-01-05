@@ -1023,7 +1023,7 @@ M.set_header = function(opts, hdr_tbl)
     local def = definitions[h]
     local txt = def.val(opts)
     if def and txt then
-      hdr_str = not hdr_str and "" or (hdr_str .. ", ")
+      hdr_str = not hdr_str and "" or (hdr_str .. "\n")
       hdr_str = ("%s%s%s"):format(hdr_str, def.hdr_txt_str,
         not def.hdr_txt_col and txt or
         utils.ansi_from_hl(def.hdr_txt_col, txt))
