@@ -890,11 +890,12 @@ end
 
 M.set_header = function(opts, hdr_tbl)
   local function normalize_cwd(cwd)
-    if path.is_absolute(cwd) and not path.equals(cwd, uv.cwd()) then
-      -- since we're always converting cwd to full path
-      -- try to convert it back to relative for display
-      cwd = path.relative_to(cwd, uv.cwd())
-    end
+    -- HACK: i prefer absolute dir
+    -- if path.is_absolute(cwd) and not path.equals(cwd, uv.cwd()) then
+    --   -- since we're always converting cwd to full path
+    --   -- try to convert it back to relative for display
+    --   cwd = path.relative_to(cwd, uv.cwd())
+    -- end
     -- make our home dir path look pretty
     return path.HOME_to_tilde(cwd)
   end
